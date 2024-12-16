@@ -13,13 +13,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy project files into the container
-COPY . /app
+COPY ./PhotoClient /app
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose the necessary ports (if needed)
-EXPOSE 8080
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Set the default command to run the GUI application
 CMD ["python", "MainGUI.py"]

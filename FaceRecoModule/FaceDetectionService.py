@@ -10,12 +10,14 @@ def process_image(image_bytes):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     face_cascade = cv2.CascadeClassifier('model/haarcascade_default.xml')
+    if face_cascade.empty():
+        raise FileNotFoundError("Haarcascade file not found or invalid")
     detections = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5, minSize=(20, 20))
 
     return len(detections) == 1
 
 def start_server():
-    host = 'localhost'
+    host = 'facedetectionservice'
     port = 5678
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))

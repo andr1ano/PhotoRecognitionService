@@ -5,14 +5,12 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the source files
-COPY PhotoServer/src /app/src
-COPY photos.db /app/photos.db
+COPY ./PhotoServer /app
 
 # Compile the Java application
-RUN javac src/main/java/com/photo_server/PhotoServer.java -d /app/bin
+RUN javac /app/src/main/java/com/photo_server/* -d /app/bin
 
-# Expose the application and Python service ports
-EXPOSE 8080 5678
+EXPOSE 8080
 
 # Set the default command to run the application
-CMD ["java", "-cp", "/app/bin", "com.photo_server.PhotoServer"]
+CMD ["java", "-cp", "/app/bin:/app/lib/sqlite-jdbc-3.36.0.3.jar", "src/main/java/com/photo_server/PhotoServer.java"]
