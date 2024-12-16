@@ -11,9 +11,7 @@ import com.sun.net.httpserver.HttpExchange;
 
 public class PhotoServer {
 
-    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
-        Class.forName("org.sqlite.JDBC");
-        DriverManager.getConnection("jdbc:sqlite:photos.db");
+    public static void main(String[] args) throws IOException {
         int port = 8080;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/send", new SendImageHandler());

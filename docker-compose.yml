@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  facedetectionservice:
+    build:
+      context: .
+      dockerfile: ./FaceRecoModule/Dockerfile
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./FaceRecoModule:/app  # Only mount PhotoServer directory
+    networks:
+      - app-network
+
+  guiservice:
+    build:
+      context: .
+      dockerfile: ./PhotoClient/Dockerfile
+    volumes:
+      - ./PhotoClient:/app  # Only mount PhotoServer directory
+      - /tmp/.X11-unix:/tmp/.X11-unix  # Mount X11 socket for GUI access
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DISPLAY=host.docker.internal:0  # Set the DISPLAY variable for GUI access
+    networks:
+      - app-network
+
+  photo_server:
+    build:
+      context: .
+      dockerfile: ./PhotoServer/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./PhotoServer:/app  # Only mount PhotoServer directory
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
