@@ -24,4 +24,3 @@ EXPOSE 8080
 
 # Set the default command to run the application
 CMD ["java", "-jar", "target/PhotoServer-1.0.jar"]
-# CMD ["java", "-cp", "target/classes:target/dependency/*", "com.photo_server.PhotoServer"]

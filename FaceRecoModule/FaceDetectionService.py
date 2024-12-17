@@ -11,6 +11,11 @@ class FaceDetectionServicer(service_server_pb2_grpc.FaceDetectionServiceServicer
         try:
             image_data = request.image_data
             image_array = np.frombuffer(base64.b64decode(image_data), dtype=np.uint8)
+            if image_array.size == 0:
+                context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+                context.set_details('Received empty image data')
+                return service_server_pb2.DetectionResponse(is_valid=False)
+
             image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
 
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

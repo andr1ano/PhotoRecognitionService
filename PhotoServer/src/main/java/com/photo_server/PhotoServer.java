@@ -44,13 +44,10 @@ public class PhotoServer {
     static class SendImageHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            System.out.println("test");
             InputStream inputStream = exchange.getRequestBody();
             String imageName = exchange.getRequestURI().getQuery();  // Assuming the image name is passed as a query parameter
-
             byte[] imageBytes = inputStream.readAllBytes();
             boolean isValid = checkFaceDetection(imageBytes);
-
             boolean isSaved = false;
             String response;
             try {
@@ -145,8 +142,7 @@ public class PhotoServer {
         FaceDetectionServiceGrpc.FaceDetectionServiceBlockingStub stub = FaceDetectionServiceGrpc.newBlockingStub(channel);
 
         try {
-            String encodedImage = Base64.getEncoder().encodeToString(imageBytes);
-            ImageRequest request = ImageRequest.newBuilder().setImageData(ByteString.copyFrom(Base64.getDecoder().decode(encodedImage))).build();
+            ImageRequest request = ImageRequest.newBuilder().setImageData(ByteString.copyFrom(imageBytes)).build();
             DetectionResponse response = stub.detectFace(request);
             System.out.println("Face detection response: " + response.getIsValid());
             return response.getIsValid();
