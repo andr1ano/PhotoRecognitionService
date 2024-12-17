@@ -5,9 +5,17 @@ import java.net.*;
 import java.util.Base64;
 import java.sql.*;
 
+import com.google.protobuf.ByteString;
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
+
+import photo_server.FaceDetectionServiceGrpc;
+import photo_server.ServiceServer.ImageRequest;
+import photo_server.ServiceServer.DetectionResponse;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 public class PhotoServer {
 
@@ -110,21 +118,24 @@ public class PhotoServer {
     }
 
     private static boolean checkFaceDetection(byte[] imageBytes) {
-        try (Socket pythonSocket = new Socket("facedetectionservice", 5678);
-             OutputStream outputStream = pythonSocket.getOutputStream();
-             InputStream inputStream = pythonSocket.getInputStream()) {
+        // Create a channel to connect to the gRPC server
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 5678)
+                .usePlaintext()
+                .build();
 
-            outputStream.write(imageBytes);
-            outputStream.flush();
-            pythonSocket.shutdownOutput();
+        // Create a stub to call the gRPC service
+        FaceDetectionServiceGrpc.FaceDetectionServiceBlockingStub stub = FaceDetectionServiceGrpc.newBlockingStub(channel);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String response = reader.readLine();
-            return "true".equalsIgnoreCase(response);
+        // Convert image bytes to Base64 string
+        String encodedImage = Base64.getEncoder().encodeToString(imageBytes);
 
-        } catch (IOException e) {
-            System.out.println("Error connecting to Python service: " + e.getMessage());
-            return false;
-        }
+        ImageRequest request = ImageRequest.newBuilder().setImageData(ByteString.copyFrom(Base64.getDecoder().decode(encodedImage))).build();
+
+        DetectionResponse response = stub.detectFace(request);
+
+        channel.shutdownNow();
+
+        // Return true if the response indicates a valid face
+        return response.getIsValid();
     }
 }

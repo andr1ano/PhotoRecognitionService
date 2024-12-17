@@ -31,7 +31,7 @@ def capture_photo():
         custom_messagebox("CRITICAL ERROR", "Don't you want to be captured?")
         return None
 
-def send_image(file_path, image_name, host='http://photo_server', port=8080):
+def send_image(file_path, image_name, host='http://localhost', port=8080):
     url = f"{host}:{port}/send?{image_name}"
 
     with open(file_path, "rb") as image_file:
@@ -41,7 +41,7 @@ def send_image(file_path, image_name, host='http://photo_server', port=8080):
     print(f"Server response: {response.text}")
     return response.text
 
-def send_image_name(image_name, host='http://photo_server', port=8080):
+def send_image_name(image_name, host='http://localhost', port=8080):
     url = f"{host}:{port}/request?{image_name}"
     response = requests.get(url)
 

@@ -13,4 +13,4 @@ RUN javac /app/src/main/java/com/photo_server/* -d /app/bin
 EXPOSE 8080
 
 # Set the default command to run the application
-CMD ["java", "-cp", "/app/bin:/app/lib/sqlite-jdbc-3.36.0.3.jar", "src/main/java/com/photo_server/PhotoServer.java"]
+CMD ["java", "-cp", "/app/bin:/app/lib/sqlite-jdbc-3.36.0.3.jar:/app/target", "src/main/java/com/photo_server/PhotoServer.java"]
