@@ -19,19 +19,32 @@ import io.grpc.ManagedChannelBuilder;
 
 public class PhotoServer {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int port = 8080;
-        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/send", new SendImageHandler());
-        server.createContext("/request", new RequestImageHandler());
-        server.setExecutor(null);
-        System.out.println("Server is listening on port " + port);
-        server.start();
+
+        try {
+            HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+            System.out.println("Attempting to start server on port " + port);
+
+            // Register the handler for "/send" and "/request"
+            server.createContext("/send", new SendImageHandler());
+            server.createContext("/request", new RequestImageHandler());
+
+            // Start the server
+            server.setExecutor(null);  // Uses default executor
+            server.start();
+            System.out.println("Server is listening on port " + port);
+
+        } catch (IOException e) {
+            System.err.println("Error starting the server: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     static class SendImageHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+            System.out.println("test");
             InputStream inputStream = exchange.getRequestBody();
             String imageName = exchange.getRequestURI().getQuery();  // Assuming the image name is passed as a query parameter
 
@@ -39,17 +52,27 @@ public class PhotoServer {
             boolean isValid = checkFaceDetection(imageBytes);
 
             boolean isSaved = false;
-            if(isValid)
-            {
-                byte[] decodedImage = Base64.getDecoder().decode(imageBytes);
-                isSaved = saveImageToDatabase(imageName, decodedImage);
+            String response;
+            try {
+                if (isValid) {
+                    byte[] decodedImage = Base64.getDecoder().decode(imageBytes);
+                    isSaved = saveImageToDatabase(imageName, decodedImage);
+                }
+
+                response = (isValid && isSaved) ? "SUCCESS" : "FAILURE";
+            } catch (Exception e) {
+                response = "Error processing image: " + e.getMessage();
+                System.err.println("Error in SendImageHandler: " + e.getMessage());
             }
 
-            String response = (isValid && isSaved) ? "SUCCESS" : "FAILURE";
-            exchange.sendResponseHeaders(200, response.getBytes().length);
-            OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
+            try {
+                exchange.sendResponseHeaders(200, response.getBytes().length);
+                OutputStream os = exchange.getResponseBody();
+                os.write(response.getBytes());
+                os.close();
+            } catch (IOException e) {
+                System.err.println("Error sending response: " + e.getMessage());
+            }
         }
     }
 
@@ -118,24 +141,20 @@ public class PhotoServer {
     }
 
     private static boolean checkFaceDetection(byte[] imageBytes) {
-        // Create a channel to connect to the gRPC server
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 5678)
-                .usePlaintext()
-                .build();
-
-        // Create a stub to call the gRPC service
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("facedetectionservice", 5678).usePlaintext().build();
         FaceDetectionServiceGrpc.FaceDetectionServiceBlockingStub stub = FaceDetectionServiceGrpc.newBlockingStub(channel);
 
-        // Convert image bytes to Base64 string
-        String encodedImage = Base64.getEncoder().encodeToString(imageBytes);
-
-        ImageRequest request = ImageRequest.newBuilder().setImageData(ByteString.copyFrom(Base64.getDecoder().decode(encodedImage))).build();
-
-        DetectionResponse response = stub.detectFace(request);
-
-        channel.shutdownNow();
-
-        // Return true if the response indicates a valid face
-        return response.getIsValid();
+        try {
+            String encodedImage = Base64.getEncoder().encodeToString(imageBytes);
+            ImageRequest request = ImageRequest.newBuilder().setImageData(ByteString.copyFrom(Base64.getDecoder().decode(encodedImage))).build();
+            DetectionResponse response = stub.detectFace(request);
+            System.out.println("Face detection response: " + response.getIsValid());
+            return response.getIsValid();
+        } catch (Exception e) {
+            System.out.println("Error during face detection: " + e.getMessage());
+            return false;
+        } finally {
+            channel.shutdownNow();
+        }
     }
 }

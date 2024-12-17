@@ -1,16 +1,27 @@
-# Use an official OpenJDK runtime as the base image
 FROM openjdk:17-jdk-slim
+
+# Install Maven to build the project
+RUN apt-get update && apt-get install -y maven
 
 # Set the working directory in the container
 WORKDIR /app
 
+# Copy the Maven project files
+COPY ./PhotoServer/pom.xml /app/pom.xml
+
 # Copy the source files
-COPY ./PhotoServer /app
+COPY ./PhotoServer/src /app/src
 
-# Compile the Java application
-RUN javac /app/src/main/java/com/photo_server/* -d /app/bin
+# Copy the lib and target directories (if needed)
+COPY ./PhotoServer/lib /app/lib
+COPY ./PhotoServer/target /app/target
 
+# Build the project using Maven
+RUN mvn clean install
+
+# Expose the port your app will run on
 EXPOSE 8080
 
 # Set the default command to run the application
-CMD ["java", "-cp", "/app/bin:/app/lib/sqlite-jdbc-3.36.0.3.jar:/app/target", "src/main/java/com/photo_server/PhotoServer.java"]
+CMD ["java", "-jar", "target/PhotoServer-1.0.jar"]
+# CMD ["java", "-cp", "target/classes:target/dependency/*", "com.photo_server.PhotoServer"]
