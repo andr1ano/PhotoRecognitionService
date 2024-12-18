@@ -1,5 +1,6 @@
 from tkinter import Button, Label, Toplevel
 
+# I love fancy windows💅.
 def custom_messagebox(title, message):
     msg_box = Toplevel()
     msg_box.title(title)

@@ -2,17 +2,14 @@ syntax = "proto3";
 
 package photo_server;
 
-// Define the request message with the image bytes
 message ImageRequest {
     bytes image_data = 1;
 }
 
-// Define the response message with the detection result
 message DetectionResponse {
     bool is_valid = 1;
 }
 
-// Define the gRPC service for face detection
 service FaceDetectionService {
     rpc DetectFace(ImageRequest) returns (DetectionResponse);
 }

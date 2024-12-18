@@ -36,10 +36,11 @@ class FaceDetectionServicer(service_server_pb2_grpc.FaceDetectionServiceServicer
             context.set_details(str(e))
             return service_server_pb2.DetectionResponse(is_valid=False)
 
+# Start service on port.
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     service_server_pb2_grpc.add_FaceDetectionServiceServicer_to_server(FaceDetectionServicer(), server)
-    server.add_insecure_port('0.0.0.0:5678')  # Standard gRPC port
+    server.add_insecure_port('facedetectionservice:5678')
     print("gRPC server running on port 5678")
     server.start()
     server.wait_for_termination()

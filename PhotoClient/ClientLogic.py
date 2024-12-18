@@ -8,10 +8,10 @@ from InfoWindow import custom_messagebox
 def select_file():
     root = Tk()
     root.withdraw()
-    # Open the file dialog without any filters
     file_path = filedialog.askopenfilename()
     return file_path
 
+# WON'T WORK INSIDE DOCKER!!!
 def capture_photo():
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
@@ -31,6 +31,7 @@ def capture_photo():
         custom_messagebox("CRITICAL ERROR", "Don't you want to be captured?")
         return None
 
+# Generate POST request.
 def send_image(file_path, image_name, host='http://photo_server', port=8080):
     url = f"{host}:{port}/send?{image_name}"
 
@@ -41,6 +42,7 @@ def send_image(file_path, image_name, host='http://photo_server', port=8080):
     print(f"Server response: {response.text}")
     return response.text
 
+# Generate GET request.
 def send_image_name(image_name, host='http://photo_server', port=8080):
     url = f"{host}:{port}/request?{image_name}"
     response = requests.get(url)
