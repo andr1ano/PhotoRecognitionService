@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.photo_server.PhotoServerTest" time="0.009" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.class.path" value="C:\Users\andr1ano\Documents\KPI\CPP\assignment3\PhotoServer\target\test-classes;C:\Users\andr1ano\Documents\KPI\CPP\assignment3\PhotoServer\target\classes;C:\Users\andr1ano\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\andr1ano\.m2\repository\org\xerial\sqlite-jdbc\3.36.0.3\sqlite-jdbc-3.36.0.3.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-core\1.68.1\grpc-core-1.68.1.jar;C:\Users\andr1ano\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\andr1ano\.m2\repository\com\google\android\annotations\4.1.1.4\annotations-4.1.1.4.jar;C:\Users\andr1ano\.m2\repository\org\codehaus\mojo\animal-sniffer-annotations\1.24\animal-sniffer-annotations-1.24.jar;C:\Users\andr1ano\.m2\repository\com\google\errorprone\error_prone_annotations\2.28.0\error_prone_annotations-2.28.0.jar;C:\Users\andr1ano\.m2\repository\com\google\guava\guava\33.2.1-android\guava-33.2.1-android.jar;C:\Users\andr1ano\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\andr1ano\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\andr1ano\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\andr1ano\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\andr1ano\.m2\repository\io\perfmark\perfmark-api\0.27.0\perfmark-api-0.27.0.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-context\1.68.1\grpc-context-1.68.1.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-api\1.68.1\grpc-api-1.68.1.jar;C:\Users\andr1ano\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-netty-shaded\1.68.1\grpc-netty-shaded-1.68.1.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-util\1.68.1\grpc-util-1.68.1.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-stub\1.68.1\grpc-stub-1.68.1.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-protobuf\1.68.1\grpc-protobuf-1.68.1.jar;C:\Users\andr1ano\.m2\repository\com\google\protobuf\protobuf-java\3.25.5\protobuf-java-3.25.5.jar;C:\Users\andr1ano\.m2\repository\com\google\api\grpc\proto-google-common-protos\2.41.0\proto-google-common-protos-2.41.0.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-protobuf-lite\1.68.1\grpc-protobuf-lite-1.68.1.jar;C:\Users\andr1ano\.m2\repository\org\apache\tomcat\annotations-api\6.0.53\annotations-api-6.0.53.jar;"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="user.timezone" value="Europe/Helsinki"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="UA"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Microsoft\jdk-11.0.16.101-hotspot\bin"/>
+    <property name="sun.java.command" value="C:\Users\andr1ano\AppData\Local\Temp\surefire16177282271188927215\surefirebooter-20241218002133397_3.jar C:\Users\andr1ano\AppData\Local\Temp\surefire16177282271188927215 2024-12-18T00-21-33_194-jvmRun1 surefire-20241218002133397_1tmp surefire_0-20241218002133397_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\andr1ano\Documents\KPI\CPP\assignment3\PhotoServer\target\test-classes;C:\Users\andr1ano\Documents\KPI\CPP\assignment3\PhotoServer\target\classes;C:\Users\andr1ano\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\andr1ano\.m2\repository\org\xerial\sqlite-jdbc\3.36.0.3\sqlite-jdbc-3.36.0.3.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-core\1.68.1\grpc-core-1.68.1.jar;C:\Users\andr1ano\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\andr1ano\.m2\repository\com\google\android\annotations\4.1.1.4\annotations-4.1.1.4.jar;C:\Users\andr1ano\.m2\repository\org\codehaus\mojo\animal-sniffer-annotations\1.24\animal-sniffer-annotations-1.24.jar;C:\Users\andr1ano\.m2\repository\com\google\errorprone\error_prone_annotations\2.28.0\error_prone_annotations-2.28.0.jar;C:\Users\andr1ano\.m2\repository\com\google\guava\guava\33.2.1-android\guava-33.2.1-android.jar;C:\Users\andr1ano\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\andr1ano\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\andr1ano\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\andr1ano\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\andr1ano\.m2\repository\io\perfmark\perfmark-api\0.27.0\perfmark-api-0.27.0.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-context\1.68.1\grpc-context-1.68.1.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-api\1.68.1\grpc-api-1.68.1.jar;C:\Users\andr1ano\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-netty-shaded\1.68.1\grpc-netty-shaded-1.68.1.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-util\1.68.1\grpc-util-1.68.1.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-stub\1.68.1\grpc-stub-1.68.1.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-protobuf\1.68.1\grpc-protobuf-1.68.1.jar;C:\Users\andr1ano\.m2\repository\com\google\protobuf\protobuf-java\3.25.5\protobuf-java-3.25.5.jar;C:\Users\andr1ano\.m2\repository\com\google\api\grpc\proto-google-common-protos\2.41.0\proto-google-common-protos-2.41.0.jar;C:\Users\andr1ano\.m2\repository\io\grpc\grpc-protobuf-lite\1.68.1\grpc-protobuf-lite-1.68.1.jar;C:\Users\andr1ano\.m2\repository\org\apache\tomcat\annotations-api\6.0.53\annotations-api-6.0.53.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\andr1ano"/>
+    <property name="user.language" value="uk"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-08-12"/>
+    <property name="java.home" value="C:\Program Files\Microsoft\jdk-11.0.16.101-hotspot"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\andr1ano\Documents\KPI\CPP\assignment3\PhotoServer"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\andr1ano\AppData\Local\Temp\surefire16177282271188927215\surefirebooter-20241218002133397_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.16.1+1-LTS"/>
+    <property name="user.name" value="andr1ano"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1251"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-40648"/>
+    <property name="localRepository" value="C:\Users\andr1ano\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\andr1ano\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2024.1"/>
+    <property name="java.version" value="11.0.16.1"/>
+    <property name="user.dir" value="C:\Users\andr1ano\Documents\KPI\CPP\assignment3\PhotoServer"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\Microsoft\jdk-11.0.16.101-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Microsoft\jdk-11.0.16.101-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Program Files\swipl\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\CMake\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Users\andr1ano\AppData\Local\Programs\Python\Launcher\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\andr1ano\.cargo\bin;C:\Users\andr1ano\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\PyCharm 2024.2.3\bin;;C:\Users\andr1ano\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.1\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1\bin;;C:\Program Files\JetBrains\CLion 2024.2\bin;;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="11.0.16.1+1-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="55.0"/>
+  </properties>
+  <testcase name="testApp" classname="com.photo_server.PhotoServerTest" time="0.002"/>
+</testsuite>

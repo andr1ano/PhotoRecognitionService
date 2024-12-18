@@ -19,7 +19,7 @@ class FaceDetectionServicer(service_server_pb2_grpc.FaceDetectionServiceServicer
             image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-            face_cascade = cv2.CascadeClassifier('model/haarcascade_default.xml')
+            face_cascade = cv2.CascadeClassifier('ServiceCode/model/haarcascade_default.xml')
             if face_cascade.empty():
                 context.set_code(grpc.StatusCode.INTERNAL)
                 context.set_details('Haarcascade file not found or invalid')
@@ -32,8 +32,9 @@ class FaceDetectionServicer(service_server_pb2_grpc.FaceDetectionServiceServicer
             elif len(detections) > 1:
                 context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
                 context.set_details('Multiple faces detected')
+                return service_server_pb2.DetectionResponse(is_valid=False)
 
-            return service_server_pb2.DetectionResponse(is_valid=False)
+            return service_server_pb2.DetectionResponse(is_valid=True)
         except Exception as e:
             context.set_code(grpc.StatusCode.INTERNAL)
             context.set_details(str(e))
