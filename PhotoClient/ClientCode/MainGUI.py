@@ -1,4 +1,5 @@
 from tkinter import Entry, Button, Label
+
 from ClientLogic import *
 
 def create_gui():

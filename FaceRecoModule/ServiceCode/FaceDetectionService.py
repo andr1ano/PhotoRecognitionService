@@ -3,8 +3,8 @@ import numpy as np
 import base64
 from concurrent import futures
 import grpc
-import service_server_pb2
-import service_server_pb2_grpc
+
+import service_server_pb2, service_server_pb2_grpc
 
 class FaceDetectionServicer(service_server_pb2_grpc.FaceDetectionServiceServicer):
     def DetectFace(self, request, context):
@@ -17,7 +17,6 @@ class FaceDetectionServicer(service_server_pb2_grpc.FaceDetectionServiceServicer
                 return service_server_pb2.DetectionResponse(is_valid=False)
 
             image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
-
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
             face_cascade = cv2.CascadeClassifier('model/haarcascade_default.xml')
@@ -28,9 +27,13 @@ class FaceDetectionServicer(service_server_pb2_grpc.FaceDetectionServiceServicer
 
             detections = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5, minSize=(20, 20))
 
-            is_valid = len(detections) == 1
+            if len(detections) == 0:
+                return service_server_pb2.DetectionResponse(is_valid=False)
+            elif len(detections) > 1:
+                context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+                context.set_details('Multiple faces detected')
 
-            return service_server_pb2.DetectionResponse(is_valid=is_valid)
+            return service_server_pb2.DetectionResponse(is_valid=False)
         except Exception as e:
             context.set_code(grpc.StatusCode.INTERNAL)
             context.set_details(str(e))

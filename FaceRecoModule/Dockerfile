@@ -1,9 +1,12 @@
 FROM python:3.12-slim
 
-# Create dir and copy all working files.
+# Create directory and copy all working files.
 WORKDIR /app
 
 COPY ./FaceRecoModule /app
+
+# Set folder as the Python module directory.
+ENV PYTHONPATH=/app/ServiceCode
 
 # Install all required system dependencies.
 RUN apt-get update && apt-get install -y \
@@ -17,4 +20,4 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 EXPOSE 5678
 
 # Run service.
-CMD ["python", "FaceDetectionService.py"]
+CMD ["python", "ServiceCode/FaceDetectionService.py"]

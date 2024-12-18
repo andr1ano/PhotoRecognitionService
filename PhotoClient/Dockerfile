@@ -1,9 +1,12 @@
 FROM python:3.12-slim
 
-# Create dir and copy all working files.
+# Create directory and copy all working files.
 WORKDIR /app
 
 COPY ./PhotoClient /app
+
+# Set folder as the Python module directory.
+ENV PYTHONPATH=/app/ClientCode
 
 # Install all required system dependencies.
 RUN apt-get update && apt-get install -y \
@@ -17,4 +20,4 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Run client.
-CMD ["python", "MainGUI.py"]
+CMD ["python", "ClientCode/MainGUI.py"]
